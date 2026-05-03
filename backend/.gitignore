@@ -8,7 +8,10 @@ node_modules/
 
 # Environment
 .env
-.env.*
+.env.local
+.env.development
+.env.production
+!.env.example
 
 # Uploads
 uploads/*
