@@ -153,7 +153,18 @@ function Admin({ showToast }) {
         setProjects(res.data.data || []);
       } else if (activeTab === 'settings') {
         const res = await axios.get(`${API_URL}/settings`);
-        setSettings(res.data.data || null);
+        const data = res.data.data || null;
+        // Migrate old heroStats object to new array format
+        if (data && data.heroStats && !Array.isArray(data.heroStats)) {
+          const old = data.heroStats;
+          data.heroStats = [
+            { label: 'Years Experience', value: old.experience || '' },
+            { label: 'Projects Shipped', value: old.projects || '' },
+            { label: 'Happy Clients', value: old.clients || '' },
+            { label: 'Coffee Consumed', value: old.coffee || '' },
+          ].filter(s => s.value);
+        }
+        setSettings(data);
       }
     } catch (err) {
       if (err.response?.status === 401 || err.response?.status === 403) {
