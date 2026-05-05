@@ -506,7 +506,17 @@ section { position: relative; z-index: 1; scroll-margin-top: 100px; }
 .project-body { padding: 24px; }
 .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 8px; }
 .project-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; }
-.project-stack { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.project-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+.tech-icon-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  cursor: default; transition: all 0.25s ease; position: relative;
+}
+.tech-icon-pill:hover {
+  background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
 .project-footer { display: flex; gap: 12px; }
 
 .btn-sm {

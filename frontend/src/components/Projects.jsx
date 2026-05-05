@@ -2,8 +2,61 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
+import {
+  IconReact, IconNode, IconNextJS, IconPython, IconGo, IconTS, IconJS,
+  IconPostgres, IconMongo, IconRedis, IconDocker, IconAWS,
+  IconHTML, IconCSS, IconTailwind, IconVue, IconAngular,
+  IconFigma, IconGraphQL, IconFirebase, IconJava
+} from './Icons';
 
 const BASE_URL = API_URL.replace('/api', '');
+
+const techIconMap = {
+  'react': IconReact,
+  'next.js': IconNextJS,
+  'nextjs': IconNextJS,
+  'node.js': IconNode,
+  'nodejs': IconNode,
+  'node': IconNode,
+  'python': IconPython,
+  'go': IconGo,
+  'typescript': IconTS,
+  'javascript': IconJS,
+  'js': IconJS,
+  'ts': IconTS,
+  'postgresql': IconPostgres,
+  'postgres': IconPostgres,
+  'mongodb': IconMongo,
+  'mongo': IconMongo,
+  'redis': IconRedis,
+  'docker': IconDocker,
+  'aws': IconAWS,
+  'html': IconHTML,
+  'html5': IconHTML,
+  'css': IconCSS,
+  'css3': IconCSS,
+  'tailwind': IconTailwind,
+  'tailwindcss': IconTailwind,
+  'vue': IconVue,
+  'vue.js': IconVue,
+  'angular': IconAngular,
+  'figma': IconFigma,
+  'graphql': IconGraphQL,
+  'firebase': IconFirebase,
+  'java': IconJava,
+};
+
+function TechIcon({ name }) {
+  const Icon = techIconMap[name.toLowerCase()];
+  if (Icon) {
+    return (
+      <span className="tech-icon-pill" title={name}>
+        <Icon size={18} />
+      </span>
+    );
+  }
+  return <span className="tag">{name}</span>;
+}
 const fallbackProjects = [
   {
     _id: '1',
@@ -102,7 +155,7 @@ function Projects() {
               <p className="project-desc">{project.description}</p>
               <div className="project-stack">
                 {project.stack.map((tech, i) => (
-                  <span className="tag" key={i}>{tech}</span>
+                  <TechIcon name={tech} key={i} />
                 ))}
               </div>
               <div className="project-footer">
@@ -151,7 +204,7 @@ function Projects() {
                     <p className="project-desc">{project.description}</p>
                     <div className="project-stack">
                       {project.stack.map((tech, i) => (
-                        <span className="tag" key={i}>{tech}</span>
+                        <TechIcon name={tech} key={i} />
                       ))}
                     </div>
                     <div className="project-footer">
