@@ -874,9 +874,42 @@ function Admin({ showToast }) {
                         <label className="form-label">Gradient (CSS)</label>
                         <input className="form-input" required value={newProject.gradient} onChange={e => setNewProject({...newProject, gradient: e.target.value})} placeholder="e.g. linear-gradient(...)" />
                       </div>
-                      <div className="form-group">
-                        <label className="form-label">Stack (comma separated)</label>
-                        <input className="form-input" required value={newProject.stack} onChange={e => setNewProject({...newProject, stack: e.target.value})} placeholder="React, Node.js, MongoDB" />
+                      <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                        <label className="form-label">Tech Stack (click to toggle)</label>
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', padding: '12px', background: 'rgba(0,0,0,0.2)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                          {['HTML5','CSS3','Tailwind','JavaScript','TypeScript','React','Next.js','Vue','Angular','Node.js','Python','Java','Go','PostgreSQL','MongoDB','Redis','Firebase','GraphQL','Docker','AWS','Stripe','FastAPI','LangChain','Pinecone','FHIR','Azure','K8s','Express'].map(tech => {
+                            const selected = newProject.stack.split(',').map(s => s.trim()).filter(Boolean).includes(tech);
+                            return (
+                              <button
+                                key={tech}
+                                type="button"
+                                onClick={() => {
+                                  const currentStack = newProject.stack.split(',').map(s => s.trim()).filter(Boolean);
+                                  const newStack = selected
+                                    ? currentStack.filter(t => t !== tech)
+                                    : [...currentStack, tech];
+                                  setNewProject({...newProject, stack: newStack.join(', ')});
+                                }}
+                                style={{
+                                  padding: '6px 12px', borderRadius: '20px', fontSize: '12px', cursor: 'pointer',
+                                  background: selected ? 'rgba(108,99,255,0.3)' : 'rgba(255,255,255,0.04)',
+                                  border: selected ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.08)',
+                                  color: selected ? '#fff' : 'var(--text-muted)',
+                                  transition: 'all 0.2s ease', fontWeight: selected ? '600' : '400'
+                                }}
+                              >
+                                {tech}
+                              </button>
+                            );
+                          })}
+                        </div>
+                        <input 
+                          className="form-input" 
+                          value={newProject.stack} 
+                          onChange={e => setNewProject({...newProject, stack: e.target.value})} 
+                          placeholder="Or type custom: React, Node.js, MongoDB"
+                          style={{ marginTop: '8px', fontSize: '12px' }}
+                        />
                       </div>
                     </div>
 

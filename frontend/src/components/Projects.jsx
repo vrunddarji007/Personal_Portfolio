@@ -6,7 +6,8 @@ import {
   IconReact, IconNode, IconNextJS, IconPython, IconGo, IconTS, IconJS,
   IconPostgres, IconMongo, IconRedis, IconDocker, IconAWS,
   IconHTML, IconCSS, IconTailwind, IconVue, IconAngular,
-  IconFigma, IconGraphQL, IconFirebase, IconJava
+  IconFigma, IconGraphQL, IconFirebase, IconJava,
+  IconStripe, IconExpress, IconAzure, IconK8s, IconFastAPI, IconLangChain, IconPinecone, IconFHIR
 } from './Icons';
 
 const BASE_URL = API_URL.replace('/api', '');
@@ -44,6 +45,16 @@ const techIconMap = {
   'graphql': IconGraphQL,
   'firebase': IconFirebase,
   'java': IconJava,
+  'stripe': IconStripe,
+  'express': IconExpress,
+  'express.js': IconExpress,
+  'azure': IconAzure,
+  'k8s': IconK8s,
+  'kubernetes': IconK8s,
+  'fastapi': IconFastAPI,
+  'langchain': IconLangChain,
+  'pinecone': IconPinecone,
+  'fhir': IconFHIR,
 };
 
 function TechIcon({ name }) {
