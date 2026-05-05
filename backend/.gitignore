@@ -4,21 +4,22 @@ logs
 npm-debug.log*
 
 # Dependencies
-node_modules/
+node_modules
 
 # Environment
 .env
 .env.local
-.env.development
-.env.production
-!.env.example
+.env.*.local
 
-# Uploads
-uploads/*
-!uploads/.gitkeep
-
-# IDE & OS
-.vscode/
-.idea/
+# OS
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

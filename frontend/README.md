@@ -1,21 +1,16 @@
-# Fullstack Developer Portfolio
+# React + Vite
 
-A premium, interactive portfolio built with the MERN stack (MongoDB, Express, React, Node.js).
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
-- **Dynamic Content**: Managed via a secure Admin Panel.
-- **Maintenance Mode**: Global toggle to put the site under maintenance.
-- **Project Management**: Showcase main projects and mini-experiments.
-- **Secure Messaging**: Contact form with rate limiting and admin notification.
-- **Glassmorphic UI**: Modern, premium design with interactive canvas backgrounds.
+Currently, two official plugins are available:
 
-## Tech Stack
-- **Frontend**: React, Vite, Axios, React Router.
-- **Backend**: Node.js, Express, MongoDB (Mongoose), JWT Auth.
-- **Security**: Helmet, Rate Limiting, CORS.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Getting Started
-1. Clone the repository.
-2. Install dependencies: `npm install && npm install --prefix backend && npm install --prefix frontend`.
-3. Set up `.env` files in both `backend` and `frontend` (see `.env.example`).
-4. Run development server: `npm run dev`.
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
