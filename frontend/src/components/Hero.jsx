@@ -3,17 +3,17 @@ import axios from 'axios';
 import { API_URL } from '../config';
 
 function Hero() {
-  const [stats, setStats] = useState({
-    experience: '6+',
-    projects: '48',
-    clients: '24',
-    coffee: '∞'
-  });
+  const [stats, setStats] = useState([
+    { label: 'Years Experience', value: '6+' },
+    { label: 'Projects Shipped', value: '48' },
+    { label: 'Happy Clients', value: '24' },
+    { label: 'Coffee Consumed', value: '∞' }
+  ]);
 
   useEffect(() => {
     axios.get(`${API_URL}/settings`)
       .then(res => {
-        if (res.data.success && res.data.data.heroStats) {
+        if (res.data.success && res.data.data.heroStats && res.data.data.heroStats.length > 0) {
           setStats(res.data.data.heroStats);
         }
       })
@@ -42,22 +42,12 @@ function Hero() {
       </div>
 
       <div className="hero-stats">
-        <div className="stat-card">
-          <div className="stat-num">{stats.experience}</div>
-          <div className="stat-label">Years Experience</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-num">{stats.projects}</div>
-          <div className="stat-label">Projects Shipped</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-num">{stats.clients}</div>
-          <div className="stat-label">Happy Clients</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-num">{stats.coffee}</div>
-          <div className="stat-label">Coffee Consumed</div>
-        </div>
+        {stats.map((stat, i) => (
+          <div className="stat-card" key={i}>
+            <div className="stat-num">{stat.value}</div>
+            <div className="stat-label">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </section>
   );

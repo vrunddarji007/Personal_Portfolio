@@ -330,23 +330,51 @@ function Admin({ showToast }) {
                 <h3 style={{ marginBottom: '16px', color: 'var(--accent)', fontSize: '24px', fontFamily: "'Syne', sans-serif" }}>Hero Section Stats</h3>
                 <div style={{ background: 'rgba(0,0,0,0.3)', padding: '24px', borderRadius: '16px', border: '1px solid rgba(108,99,255,0.3)' }}>
                 <div className="contact-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <div className="form-group">
-                    <label className="form-label">Years Experience</label>
-                    <input className="form-input" value={settings.heroStats.experience} onChange={e => setSettings({...settings, heroStats: {...settings.heroStats, experience: e.target.value}})} />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Projects Shipped</label>
-                    <input className="form-input" value={settings.heroStats.projects} onChange={e => setSettings({...settings, heroStats: {...settings.heroStats, projects: e.target.value}})} />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Happy Clients</label>
-                    <input className="form-input" value={settings.heroStats.clients} onChange={e => setSettings({...settings, heroStats: {...settings.heroStats, clients: e.target.value}})} />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Coffee Consumed</label>
-                    <input className="form-input" value={settings.heroStats.coffee} onChange={e => setSettings({...settings, heroStats: {...settings.heroStats, coffee: e.target.value}})} />
-                  </div>
+                  {(settings.heroStats || []).map((stat, i) => (
+                    <div key={i} className="form-group" style={{ position: 'relative' }}>
+                      <input 
+                        className="form-input" 
+                        value={stat.label} 
+                        onChange={e => {
+                          const newStats = [...settings.heroStats];
+                          newStats[i] = { ...newStats[i], label: e.target.value };
+                          setSettings({...settings, heroStats: newStats});
+                        }}
+                        placeholder="Label"
+                        style={{ marginBottom: '8px', fontSize: '12px', color: 'var(--accent)', background: 'transparent', border: '1px solid rgba(108,99,255,0.2)', padding: '4px 8px' }}
+                      />
+                      <input 
+                        className="form-input" 
+                        value={stat.value} 
+                        onChange={e => {
+                          const newStats = [...settings.heroStats];
+                          newStats[i] = { ...newStats[i], value: e.target.value };
+                          setSettings({...settings, heroStats: newStats});
+                        }}
+                        placeholder="Value"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newStats = settings.heroStats.filter((_, idx) => idx !== i);
+                          setSettings({...settings, heroStats: newStats});
+                        }}
+                        style={{ position: 'absolute', top: '0', right: '0', background: 'transparent', border: 'none', color: '#ff5050', cursor: 'pointer', fontSize: '16px', padding: '2px 6px' }}
+                      >✕</button>
+                    </div>
+                  ))}
                 </div>
+                <button 
+                  type="button" 
+                  onClick={() => {
+                    const newStats = [...(settings.heroStats || []), { label: 'New Stat', value: '0' }];
+                    setSettings({...settings, heroStats: newStats});
+                  }} 
+                  className="btn-sm outline" 
+                  style={{ marginTop: '16px' }}
+                >
+                  + Add Stat Box
+                </button>
               </div>
             </div>
 

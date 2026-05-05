@@ -2,13 +2,11 @@ const mongoose = require('mongoose');
 
 const siteContentSchema = new mongoose.Schema({
   maintenanceMode: { type: Boolean, default: false },
-  // Phase 1: Hero Stats
-  heroStats: {
-    experience: { type: String, default: '6+' },
-    projects: { type: String, default: '48' },
-    clients: { type: String, default: '24' },
-    coffee: { type: String, default: '∞' },
-  },
+  // Phase 1: Hero Stats (dynamic array)
+  heroStats: [{
+    label: String,
+    value: String
+  }],
   
   // Phase 2: Skills (placeholder schema structure)
   skills: {
