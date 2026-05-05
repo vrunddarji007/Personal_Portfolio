@@ -503,38 +503,34 @@ function Admin({ showToast }) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
                   {(settings.skills?.techPills || []).map((pill, i) => (
                     <div key={i} style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.05)', padding: '8px', borderRadius: '8px', alignItems: 'center' }}>
-                      <input className="form-input" style={{ width: '100px', padding: '6px', fontSize: '12px' }} placeholder="Label" value={pill.label} onChange={e => {
+                      <select className="form-input" style={{ width: '160px', padding: '6px', fontSize: '12px' }} value={`${pill.iconName}|${pill.label}`} onChange={e => {
+                        const [iconName, label] = e.target.value.split('|');
                         const newPills = [...settings.skills.techPills];
-                        newPills[i].label = e.target.value;
-                        setSettings({...settings, skills: {...settings.skills, techPills: newPills}});
-                      }} />
-                      <select className="form-input" style={{ width: '100px', padding: '6px', fontSize: '12px' }} value={pill.iconName} onChange={e => {
-                        const newPills = [...settings.skills.techPills];
-                        newPills[i].iconName = e.target.value;
+                        newPills[i] = { ...newPills[i], iconName, label };
                         setSettings({...settings, skills: {...settings.skills, techPills: newPills}});
                       }}>
-                        <option value="IconHTML">HTML5</option>
-                        <option value="IconCSS">CSS3</option>
-                        <option value="IconTailwind">Tailwind</option>
-                        <option value="IconJS">JS</option>
-                        <option value="IconTS">TS</option>
-                        <option value="IconReact">React</option>
-                        <option value="IconNextJS">Next.js</option>
-                        <option value="IconVue">Vue</option>
-                        <option value="IconAngular">Angular</option>
-                        <option value="IconNode">Node.js</option>
-                        <option value="IconPython">Python</option>
-                        <option value="IconJava">Java</option>
-                        <option value="IconGo">Go</option>
-                        <option value="IconPostgres">Postgres</option>
-                        <option value="IconMongo">MongoDB</option>
-                        <option value="IconRedis">Redis</option>
-                        <option value="IconFirebase">Firebase</option>
-                        <option value="IconGraphQL">GraphQL</option>
-                        <option value="IconDocker">Docker</option>
-                        <option value="IconAWS">AWS</option>
-                        <option value="IconFigma">Figma</option>
-                        <option value="IconGitHub">GitHub</option>
+                        <option value="IconHTML|HTML5">🟠 HTML5</option>
+                        <option value="IconCSS|CSS3">🔵 CSS3</option>
+                        <option value="IconTailwind|Tailwind">💨 Tailwind</option>
+                        <option value="IconJS|JavaScript">🟡 JavaScript</option>
+                        <option value="IconTS|TypeScript">🔷 TypeScript</option>
+                        <option value="IconReact|React">⚛️ React</option>
+                        <option value="IconNextJS|Next.js">▲ Next.js</option>
+                        <option value="IconVue|Vue">🟢 Vue</option>
+                        <option value="IconAngular|Angular">🔴 Angular</option>
+                        <option value="IconNode|Node.js">🟩 Node.js</option>
+                        <option value="IconPython|Python">🐍 Python</option>
+                        <option value="IconJava|Java">☕ Java</option>
+                        <option value="IconGo|Go">🐹 Go</option>
+                        <option value="IconPostgres|PostgreSQL">🐘 PostgreSQL</option>
+                        <option value="IconMongo|MongoDB">🍃 MongoDB</option>
+                        <option value="IconRedis|Redis">🔴 Redis</option>
+                        <option value="IconFirebase|Firebase">🔥 Firebase</option>
+                        <option value="IconGraphQL|GraphQL">💜 GraphQL</option>
+                        <option value="IconDocker|Docker">🐳 Docker</option>
+                        <option value="IconAWS|AWS">☁️ AWS</option>
+                        <option value="IconFigma|Figma">🎨 Figma</option>
+                        <option value="IconGitHub|GitHub">🐙 GitHub</option>
                       </select>
                       <button type="button" onClick={() => {
                         const newPills = settings.skills.techPills.filter((_, idx) => idx !== i);
@@ -544,7 +540,7 @@ function Admin({ showToast }) {
                   ))}
                 </div>
                 <button type="button" onClick={() => {
-                  const newPills = [...(settings.skills?.techPills || []), { label: 'Tool', iconName: 'IconJS' }];
+                  const newPills = [...(settings.skills?.techPills || []), { label: 'JavaScript', iconName: 'IconJS' }];
                   setSettings({...settings, skills: {...settings.skills, techPills: newPills}});
                 }} className="btn-sm outline">
                   + Add Tech Pill
