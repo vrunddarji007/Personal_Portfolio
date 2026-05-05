@@ -126,6 +126,21 @@ function Admin({ showToast }) {
     setNewProject({ title: '', description: '', gradient: '', stack: '', liveUrl: '', githubUrl: '', order: 0 });
   };
 
+  const deleteProject = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this project?')) return;
+    try {
+      const res = await axios.delete(`${API_URL}/projects/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.data.success) {
+        setProjects(projects.filter(p => p._id !== id));
+        showToast('Project deleted', 'success');
+      }
+    } catch (err) {
+      showToast('Failed to delete project', 'error');
+    }
+  };
+
   const fetchData = async () => {
     try {
       if (activeTab === 'messages') {
@@ -881,12 +896,20 @@ function Admin({ showToast }) {
                           </div>
                         </td>
                         <td style={{ padding: '16px', fontSize: '13px', textAlign: 'right' }}>
-                          <button 
-                            onClick={() => startEditing(p)} 
-                            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', padding: '4px 12px', color: 'var(--text)', borderRadius: '4px', cursor: 'pointer' }}
-                          >
-                            Edit
-                          </button>
+                          <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                            <button 
+                              onClick={() => startEditing(p)} 
+                              style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', padding: '4px 12px', color: 'var(--text)', borderRadius: '4px', cursor: 'pointer' }}
+                            >
+                              Edit
+                            </button>
+                            <button 
+                              onClick={() => deleteProject(p._id)} 
+                              style={{ background: 'transparent', border: '1px solid rgba(255,80,80,0.4)', padding: '4px 12px', color: '#ff5050', borderRadius: '4px', cursor: 'pointer' }}
+                            >
+                              ✕
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
